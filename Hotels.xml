@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Hotels>
-  
   <Hotel Rating="4.2">
     <Name>Westin</Name>
     <Phone>480-968-8885</Phone>
@@ -39,7 +38,7 @@
   </Hotel>
 
   <Hotel Rating="4.1">
-    <Name>AC Hotel by Marriott Phoenix Tempe/Downtown</Name>
+    <Name>AC Hotel by Marriott Phoenix Tempe Downtown</Name>
     <Phone>480-642-6140</Phone>
     <Phone>877-829-2429</Phone>
     <Address NearestAirport="Sky Harbor">
@@ -101,7 +100,7 @@
   </Hotel>
 
   <Hotel>
-    <Name>Residence Inn by Marriott Tempe Downtown/University</Name>
+    <Name>Residence Inn by Marriott Tempe Downtown University</Name>
     <Phone>480-967-2300</Phone>
     <Address>
       <Number>510</Number>
@@ -113,7 +112,7 @@
   </Hotel>
 
   <Hotel Rating="3.9">
-    <Name>Hampton Inn &amp; Suites Tempe/Phoenix Airport</Name>
+    <Name>Hampton Inn &amp; Suites Tempe Phoenix Airport</Name>
     <Phone>480-941-3441</Phone>
     <Address NearestAirport="Sky Harbor">
       <Number>1550</Number>
