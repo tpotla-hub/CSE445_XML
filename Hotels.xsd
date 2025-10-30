@@ -3,7 +3,6 @@
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 
-  
   <xs:element name="Hotels">
     <xs:complexType>
       <xs:sequence>
@@ -21,12 +20,10 @@
                     <xs:element name="State" type="xs:string"/>
                     <xs:element name="Zip" type="xs:string"/>
                   </xs:sequence>
-                  
                   <xs:attribute name="NearestAirport" type="xs:string" use="optional"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            
             <xs:attribute name="Rating" type="xs:decimal" use="optional"/>
           </xs:complexType>
         </xs:element>
