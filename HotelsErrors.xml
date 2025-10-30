@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <Hotel>
+
+ 
   <Hotel Rating="4.2">
     <Name>Westin</Name>
     <Phone>480-968-8885</Phone>
@@ -14,7 +17,8 @@
   </Hotel>
 
   
-  <Hotel Rating="4.5">
+  <Hotel>
+    <Name>Hyatt Place Tempe Phoenix Airport</Name>
     <Phone>480-804-9544</Phone>
     <Address NearestAirport="Sky Harbor">
       <Number>1413</Number>
@@ -25,9 +29,10 @@
     </Address>
   </Hotel>
 
-
-  <Hotel>
+  
+  <Hotel Rating="4.0">
     <Name>Graduate Tempe</Name>
+  
     <Address>
       <Number>225</Number>
       <Street>E Apache Blvd</Street>
@@ -37,7 +42,7 @@
     </Address>
   </Hotel>
 
-  
+
   <Hotel Rating="4.1">
     <Name>AC Hotel by Marriott Phoenix Tempe Downtown</Name>
     <Phone>480-642-6140</Phone>
@@ -48,11 +53,11 @@
       <City>Tempe</City>
       <State>AZ</State>
       <Zip>85281</Zip>
-   
+
   </Hotel>
 
 
-  <Hotel>
+  <Hotel Rating="4.0">
     <Name>Tempe Mission Palms</Name>
     <Name>Duplicate Name</Name>
     <Phone>480-894-1400</Phone>
@@ -64,4 +69,5 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
+
 </Hotel>
