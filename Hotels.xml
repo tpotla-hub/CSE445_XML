@@ -14,7 +14,7 @@
   </Hotel>
 
   <Hotel Rating="4.5">
-    <Name>Hyatt Place Tempe/Phoenix Airport</Name>
+    <Name>Hyatt Place Tempe Phoenix Airport</Name>
     <Phone>480-804-9544</Phone>
     <Address NearestAirport="Sky Harbor">
       <Number>1413</Number>
@@ -63,7 +63,7 @@
   </Hotel>
 
   <Hotel Rating="4.0">
-    <Name>MOXY Phoenix Tempe/ASU Area</Name>
+    <Name>MOXY Phoenix Tempe ASU Area</Name>
     <Phone>480-337-2850</Phone>
     <Address NearestAirport="Sky Harbor">
       <Number>1333</Number>
@@ -75,7 +75,7 @@
   </Hotel>
 
   <Hotel>
-    <Name>Hilton Garden Inn Phoenix/Tempe ASU Area</Name>
+    <Name>Hilton Garden Inn Phoenix Tempe ASU Area</Name>
     <Phone>480-968-2180</Phone>
     <Address>
       <Number>720</Number>
