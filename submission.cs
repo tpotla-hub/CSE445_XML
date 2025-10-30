@@ -7,8 +7,8 @@ namespace ConsoleApp1
 {
     public class Program
     {
-        // REPLACE <your-username> with your GitHub username
-        public static string xmlURL      = "https://github.com/tpotla-hub/CSE445_XML/blob/main/Hotels.xml ";
+        
+        public static string xmlURL      = "https://github.com/tpotla-hub/CSE445_XML/blob/main/Hotels.xml";
         public static string xmlErrorURL = "https://github.com/tpotla-hub/CSE445_XML/blob/main/HotelsErrors.xml";
         public static string xsdURL      = "https://github.com/tpotla-hub/CSE445_XML/blob/main/Hotels.xsd";
 
@@ -24,7 +24,7 @@ namespace ConsoleApp1
             Console.WriteLine(result);
         }
 
-        // Q2.1
+       
         public static string Verification(string xmlUrl, string xsdUrl)
         {
             try
@@ -42,7 +42,8 @@ namespace ConsoleApp1
                 {
                     ValidationType = ValidationType.Schema,
                     Schemas = schemas,
-                    DtdProcessing = DtdProcessing.Ignore
+                    
+                    DtdProcessing = DtdProcessing.Prohibit
                 };
                 settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
                 settings.ValidationEventHandler += (sender, e) =>
@@ -68,68 +69,79 @@ namespace ConsoleApp1
             }
         }
 
-        // Q2.2
+        
         public static string Xml2Json(string xmlUrl)
         {
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(xmlUrl);
-
-                JObject hotelsRoot = new JObject();
-                JObject hotelsObj  = new JObject();
-                JArray hotelsArr   = new JArray();
-                hotelsRoot["Hotels"] = hotelsObj;
-                hotelsObj["Hotel"]   = hotelsArr;
-
-                XmlNodeList hotelNodes = doc.SelectNodes("/Hotels/Hotel");
-                foreach (XmlNode h in hotelNodes)
+                XmlDocument doc = new XmlDocument { PreserveWhitespace = false };
+                using (XmlReader xr = XmlReader.Create(xmlUrl, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }))
                 {
-                    JObject hObj = new JObject
-                    {
-                        ["Name"] = h.SelectSingleNode("Name")?.InnerText ?? ""
-                    };
-
-                    // Phones
-                    XmlNodeList phones = h.SelectNodes("Phone");
-                    if (phones.Count == 1)
-                        hObj["Phone"] = phones[0].InnerText;
-                    else if (phones.Count > 1)
-                    {
-                        JArray pArr = new JArray();
-                        foreach (XmlNode p in phones) pArr.Add(p.InnerText);
-                        hObj["Phone"] = pArr;
-                    }
-
-                    // Address
-                    XmlNode a = h.SelectSingleNode("Address");
-                    if (a != null)
-                    {
-                        JObject aObj = new JObject
-                        {
-                            ["Number"] = a.SelectSingleNode("Number")?.InnerText ?? "",
-                            ["Street"] = a.SelectSingleNode("Street")?.InnerText ?? "",
-                            ["City"]   = a.SelectSingleNode("City")?.InnerText ?? "",
-                            ["State"]  = a.SelectSingleNode("State")?.InnerText ?? "",
-                            ["Zip"]    = a.SelectSingleNode("Zip")?.InnerText ?? ""
-                        };
-
-                        string na = a.Attributes?["NearestAirport"]?.Value;
-                        if (!string.IsNullOrWhiteSpace(na))
-                            aObj["_NearestAirport"] = na;
-
-                        hObj["Address"] = aObj;
-                    }
-
-                    // Optional attribute Rating
-                    string rating = h.Attributes?["Rating"]?.Value;
-                    if (!string.IsNullOrWhiteSpace(rating))
-                        hObj["_Rating"] = rating;
-
-                    hotelsArr.Add(hObj);
+                    doc.Load(xr);
                 }
 
-                return hotelsRoot.ToString(Newtonsoft.Json.Formatting.Indented);
+                JObject root = new JObject();
+                JObject hotelsObj = new JObject();
+                JArray hotelArr = new JArray();
+                root["Hotels"] = hotelsObj;
+                hotelsObj["Hotel"] = hotelArr;
+
+                XmlNodeList hotels = doc.SelectNodes("/Hotels/Hotel");
+                if (hotels != null)
+                {
+                    foreach (XmlNode h in hotels)
+                    {
+                        JObject hObj = new JObject();
+
+                        
+                        hObj["Name"] = h.SelectSingleNode("Name")?.InnerText ?? "";
+
+                        
+                        XmlNodeList phones = h.SelectNodes("Phone");
+                        if (phones != null && phones.Count > 0)
+                        {
+                            if (phones.Count == 1)
+                            {
+                                hObj["Phone"] = phones[0].InnerText;
+                            }
+                            else
+                            {
+                                JArray pArr = new JArray();
+                                foreach (XmlNode p in phones) pArr.Add(p.InnerText);
+                                hObj["Phone"] = pArr;
+                            }
+                        }
+
+                        
+                        XmlNode a = h.SelectSingleNode("Address");
+                        if (a != null)
+                        {
+                            JObject aObj = new JObject
+                            {
+                                ["Number"] = a.SelectSingleNode("Number")?.InnerText ?? "",
+                                ["Street"] = a.SelectSingleNode("Street")?.InnerText ?? "",
+                                ["City"]   = a.SelectSingleNode("City")?.InnerText ?? "",
+                                ["State"]  = a.SelectSingleNode("State")?.InnerText ?? "",
+                                ["Zip"]    = a.SelectSingleNode("Zip")?.InnerText ?? ""
+                            };
+
+                            string nearest = a.Attributes?["NearestAirport"]?.Value;
+                            if (!string.IsNullOrWhiteSpace(nearest))
+                                aObj["_NearestAirport"] = nearest;
+
+                            hObj["Address"] = aObj;
+                        }
+
+                        
+                        string rating = h.Attributes?["Rating"]?.Value;
+                        if (!string.IsNullOrWhiteSpace(rating))
+                            hObj["_Rating"] = rating;
+
+                        hotelArr.Add(hObj);
+                    }
+                }
+
+                return root.ToString(Newtonsoft.Json.Formatting.Indented);
             }
             catch (Exception ex)
             {
