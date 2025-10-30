@@ -25,6 +25,7 @@
     </Address>
   </Hotel>
 
+
   <Hotel>
     <Name>Graduate Tempe</Name>
     <Address>
@@ -36,7 +37,7 @@
     </Address>
   </Hotel>
 
- 
+  
   <Hotel Rating="4.1">
     <Name>AC Hotel by Marriott Phoenix Tempe Downtown</Name>
     <Phone>480-642-6140</Phone>
@@ -50,7 +51,7 @@
    
   </Hotel>
 
-  
+
   <Hotel>
     <Name>Tempe Mission Palms</Name>
     <Name>Duplicate Name</Name>
