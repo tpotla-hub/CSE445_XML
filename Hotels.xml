@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Hotels 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="Hotels.xsd">
+<?xml version="1.0" encoding="utf-8"?>
+<Hotels>
   
-  <!-- Hotel entry number one - Westin property -->
+  <!-- First hotel entry - Westin -->
   <Hotel Rating="4.2">
     <Name>Westin</Name>
     <Phone>480-968-8885</Phone>
     <Phone>800-937-8461</Phone>
-    <Address NearestAirport="Sky Harbor">
+    <Address NearestAirport="Sky Habor">
       <Number>11</Number>
       <Street>E 7th St</Street>
       <City>Tempe</City>
@@ -17,7 +15,7 @@
     </Address>
   </Hotel>
   
-  <!-- Second hotel -->
+  <!-- Marriott property -->
   <Hotel Rating="4.5">
     <Name>Marriott Downtown</Name>
     <Phone>602-333-3333</Phone>
@@ -31,8 +29,8 @@
   </Hotel>
   
   <Hotel Rating="4.0">
-    <!-- Third hotel entry: Hyatt -->
     <Name>Hyatt Place Tempe</Name>
+    <!-- Multiple phone numbers -->
     <Phone>480-967-5151</Phone>
     <Phone>800-233-1234</Phone>
     <Address>
@@ -44,9 +42,9 @@
     </Address>
   </Hotel>
   
+  <!-- Hilton Garden Inn -->
   <Hotel Rating="3.8">
     <Name>Hilton Garden Inn</Name>
-    <!-- Primary phone contact -->
     <Phone>480-966-7000</Phone>
     <Address NearestAirport="Phoenix Sky Harbor">
       <Number>15</Number>
@@ -57,8 +55,8 @@
     </Address>
   </Hotel>
   
-  <!-- AC Hotel Marriott property -->
   <Hotel Rating="4.7">
+    <!-- AC Hotel -->
     <Name>AC Hotel by Marriott</Name>
     <Phone>480-642-6140</Phone>
     <Address>
@@ -82,6 +80,7 @@
     </Address>
   </Hotel>
   
+  <!-- Canopy Hilton property -->
   <Hotel Rating="4.6">
     <Name>Canopy by Hilton</Name>
     <Phone>480-568-3615</Phone>
@@ -94,7 +93,6 @@
     </Address>
   </Hotel>
   
-  <!-- Courtyard hotel by Marriott -->
   <Hotel Rating="4.3">
     <Name>Courtyard by Marriott</Name>
     <Phone>480-966-2800</Phone>
@@ -107,11 +105,11 @@
     </Address>
   </Hotel>
   
+  <!-- Holiday Inn Express property -->
   <Hotel Rating="3.7">
     <Name>Holiday Inn Express</Name>
     <Phone>480-727-4771</Phone>
     <Phone>480-727-4772</Phone>
-    <!-- Physical address details -->
     <Address>
       <Number>670</Number>
       <Street>E Apache Blvd</Street>
@@ -124,7 +122,7 @@
   <Hotel Rating="4.4">
     <Name>Graduate Tempe</Name>
     <Phone>480-967-9431</Phone>
-    <Address NearestAirport="Sky Harbor">
+    <Address NearestAirport="Sky Habor">
       <Number>225</Number>
       <Street>E Apache Blvd</Street>
       <City>Tempe</City>
@@ -133,7 +131,7 @@
     </Address>
   </Hotel>
   
-  <!-- Last hotel in the list -->
+  <!-- Moxy hotel - last entry -->
   <Hotel Rating="4.1">
     <Name>Moxy Phoenix Tempe/ASU Area</Name>
     <Phone>480-968-3451</Phone>
@@ -145,4 +143,5 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
+  
 </Hotels>
