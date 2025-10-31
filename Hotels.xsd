@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
-  <!-- Root element -->
+  
+  <!-- Define the root Hotels element -->
   <xs:element name="Hotels">
     <xs:complexType>
       <xs:sequence>
+        <!-- Hotel can appear multiple times -->
         <xs:element name="Hotel" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
+              <!-- Hotel name element -->
               <xs:element name="Name" type="xs:string"/>
+              <!-- Phone numbers - can have multiple -->
               <xs:element name="Phone" type="xs:string" maxOccurs="unbounded"/>
+              <!-- Address element definition -->
               <xs:element name="Address">
                 <xs:complexType>
                   <xs:sequence>
@@ -19,17 +23,17 @@
                     <xs:element name="State" type="xs:string"/>
                     <xs:element name="Zip" type="xs:string"/>
                   </xs:sequence>
-                  <!-- Optional NearestAirport -->
+                  <!-- NearestAirport is optional attribute -->
                   <xs:attribute name="NearestAirport" type="xs:string" use="optional"/>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            <!-- Required Rating attribute -->
+            <!-- Rating is a required attribute of type decimal -->
             <xs:attribute name="Rating" type="xs:decimal" use="required"/>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-
+  
 </xs:schema>
