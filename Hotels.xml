@@ -2,7 +2,7 @@
 <Hotels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="Hotels.xsd">
 
-  <!-- Required sample from spec -->
+  <!-- Sample from spec -->
   <Hotel Rating="4.2">
     <Name>Westin</Name>
     <Phone>480-968-8885</Phone>
@@ -126,7 +126,7 @@
     </Address>
   </Hotel>
 
-  <!-- 11th -->
+  <!-- Extra 11th hotel to satisfy “Westin + 10 more” -->
   <Hotel Rating="4.1">
     <Name>Moxy Phoenix Tempe/ASU Area</Name>
     <Phone>480-968-3451</Phone>
