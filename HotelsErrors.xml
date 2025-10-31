@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Intentionally invalid: exactly five mutations per the spec -->
 
-
+<!-- (1) Wrong root element; should be <Hotels> -->
 <Hotel>
 
- 
+  <!-- (5) Duplicate <Name> -->
   <Hotel Id="E001" Rating="4.2">
     <Name>Westin Tempe</Name>
     <Name>Westin Tempe (duplicate)</Name>
@@ -17,8 +18,8 @@
     </Address>
   </Hotel>
 
- 
-  <Hotel Rating="4.0">
+  <!-- (2) Missing required attribute (Rating) -->
+  <Hotel>
     <Name>Graduate Tempe</Name>
     <Phone>480-967-9431</Phone>
     <Address NearestAirport="Sky Harbor">
@@ -30,8 +31,8 @@
     </Address>
   </Hotel>
 
- 
-  <Hotel Id="E003">
+  <!-- (3) Missing required Phone element -->
+  <Hotel Id="E003" Rating="4.0">
     <Name>AC Hotel Phoenix Tempe/Downtown</Name>
     <Address NearestAirport="Sky Harbor">
       <Number>100</Number>
@@ -42,7 +43,7 @@
     </Address>
   </Hotel>
 
- 
+  <!-- (4) Unterminated Address (missing closing tag) -->
   <Hotel Id="E004" Rating="3.9">
     <Name>Hampton Inn &amp; Suites Tempe</Name>
     <Phone>480-410-6400</Phone>
@@ -52,7 +53,7 @@
       <City>Tempe</City>
       <State>AZ</State>
       <Zip>85281</Zip>
-   
+    <!-- no </Address> on purpose -->
   </Hotel>
 
 </Hotel>
