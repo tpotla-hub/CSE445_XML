@@ -2,7 +2,7 @@
 <Hotels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="Hotels.xsd">
 
- 
+  <!-- Required sample from spec -->
   <Hotel Rating="4.2">
     <Name>Westin</Name>
     <Phone>480-968-8885</Phone>
@@ -16,7 +16,6 @@
     </Address>
   </Hotel>
 
-  
   <Hotel Rating="4.5">
     <Name>Marriott Downtown</Name>
     <Phone>602-333-3333</Phone>
