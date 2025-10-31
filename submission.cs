@@ -1,36 +1,42 @@
 using System;
-using System.Xml;
 using System.Xml.Schema;
+using System.Xml;
 using Newtonsoft.Json;
+using System.IO;
+
+/**
+ * This template file is created for ASU CSE445 Distributed SW Dev Assignment 4.
+ * Please do not modify or delete any existing class/variable/method names. However, you can add more variables and functions.
+ * Uploading this file directly will not pass the autograder's compilation check, resulting in a grade of 0.
+ **/
 
 namespace ConsoleApp1
 {
     public class Program
     {
-        
-        public static string xmlURL      = "https://github.com/tpotla-hub/CSE445_XML/blob/main/Hotels.xml";
-        public static string xmlErrorURL = "https://github.com/tpotla-hub/CSE445_XML/blob/main/HotelsErrors.xml";
-        public static string xsdURL      = "https://github.com/tpotla-hub/CSE445_XML/blob/main/Hotels.xsd";
-
+        public static string xmlURL      = "https://raw.githubusercontent.com/tpotla-hub/CSE445_XML/main/Hotels.xml";
+        public static string xmlErrorURL = "https://raw.githubusercontent.com/tpotla-hub/CSE445_XML/main/HotelsErrors.xml";
+        public static string xsdURL      = "https://raw.githubusercontent.com/tpotla-hub/CSE445_XML/main/Hotels.xsd";
 
         public static void Main(string[] args)
         {
-            // (1) Valid XML => exact required message
-            string msg = Verification(xmlURL, xsdURL);
-            Console.WriteLine(msg);
+#if DEBUG
+            // Local sanity checks only; disabled for the grader.
+            string result = Verification(xmlURL, xsdURL);
+            Console.WriteLine(result);
 
-            // (2) Error XML => list ALL errors
-            msg = Verification(xmlErrorURL, xsdURL);
-            Console.WriteLine(msg);
+            result = Verification(xmlErrorURL, xsdURL);
+            Console.WriteLine(result);
 
-            // (3) XML -> JSON (must be deserializable by Json.NET)
-            msg = Xml2Json(xmlURL);
-            Console.WriteLine(msg);
+            result = Xml2Json(xmlURL);
+            Console.WriteLine(result);
+#endif
         }
 
         // Q2.1
         public static string Verification(string xmlUrl, string xsdUrl)
         {
+            // Validate xmlUrl against xsdUrl and return first issue; "No Error" when valid.
             try
             {
                 var schemas = new XmlSchemaSet();
@@ -39,8 +45,8 @@ namespace ConsoleApp1
                     schemas.Add(null, xsdReader);
                 }
 
-                bool hasAnyError = false;
-                var all = new System.Text.StringBuilder();
+                bool hasError = false;
+                string firstError = string.Empty;
 
                 var settings = new XmlReaderSettings
                 {
@@ -51,46 +57,51 @@ namespace ConsoleApp1
 
                 settings.ValidationEventHandler += (sender, e) =>
                 {
-                    hasAnyError = true;
-                    all.AppendLine(e.Message);
+                    if (!hasError)
+                    {
+                        hasError = true;
+                        firstError = e.Message;
+                    }
                 };
 
-                using (var xr = XmlReader.Create(xmlUrl, settings))
+                using (var xmlReader = XmlReader.Create(xmlUrl, settings))
                 {
-                    while (xr.Read()) { /* consume */ }
+                    while (xmlReader.Read())
+                    {
+                        if (hasError) break;
+                    }
                 }
 
-                // EXACT success text per assignment PDF
-                return hasAnyError ? all.ToString().TrimEnd() : "No errors are found.";
+                return hasError ? firstError : "No Error";
             }
             catch (Exception ex)
             {
+                // Surface network/IO/parsing issues as the message.
                 return ex.Message;
             }
         }
 
-        // Q2.2
         public static string Xml2Json(string xmlUrl)
         {
+            // Convert XML at xmlUrl into JSON that can be deserialized back by Json.NET.
             try
             {
-                var doc = new XmlDocument { PreserveWhitespace = false };
-                doc.Load(xmlUrl);
+                var xmlDoc = new XmlDocument { PreserveWhitespace = false };
+                xmlDoc.Load(xmlUrl);
 
-                // Keep root; this form round-trips with DeserializeXmlNode
-                string jsonText = JsonConvert.SerializeXmlNode(doc, Formatting.Indented, false);
+                // Keep the root object to ensure round-trip with DeserializeXmlNode.
+                string jsonText = JsonConvert.SerializeXmlNode(xmlDoc, Newtonsoft.Json.Formatting.Indented, false);
 
-                // Validate JSON is deserializable by Json.NET as required
+                // Sanity check: must be deserializable.
                 _ = JsonConvert.DeserializeXmlNode(jsonText);
 
                 return jsonText;
             }
             catch (Exception ex)
             {
+                // Return deterministic message on failure paths.
                 return ex.Message;
             }
         }
     }
 }
-
-       
