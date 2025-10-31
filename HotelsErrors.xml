@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Intentionally contains 5 mutations per spec. -->
+<!-- This file intentionally includes 5 errors for validation testing. -->
 <Hotel>
-  <!-- (1) Wrong root: should be <Hotels> -->
-
-  <!-- Hotel A: two Name elements (mutation #5) -->
+  <!-- Mutation 1: Incorrect root element - should be <Hotels> not <Hotel> -->
+  
+  <!-- First hotel entry - contains duplicate Name elements (mutation 5) -->
   <Hotel Id="E001" Rating="4.2">
     <Name>Westin Tempe</Name>
     <Name>Duplicate Westin Name</Name>
@@ -16,8 +16,8 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-
-  <!-- Hotel B: missing required attribute Id (mutation #2) -->
+  
+  <!-- Second hotel - missing the required Id attribute (mutation 2) -->
   <Hotel Rating="4.0">
     <Name>Graduate Tempe</Name>
     <Phone>480-967-9431</Phone>
@@ -29,8 +29,8 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-
-  <!-- Hotel C: missing Phone element entirely (mutation #3) -->
+  
+  <!-- Third hotel entry - Phone element is completely missing (mutation 3) -->
   <Hotel Id="E003">
     <Name>AC Hotel Phoenix Tempe/Downtown</Name>
     <Address NearestAirport="Sky Harbor">
@@ -41,8 +41,8 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-
-  <!-- Hotel D: Address missing closing tag (mutation #4) -->
+  
+  <!-- Fourth hotel - Address closing tag is missing (mutation 4) -->
   <Hotel Id="E004" Rating="3.9">
     <Name>Hampton Inn &amp; Suites Tempe</Name>
     <Phone>480-410-6400</Phone>
@@ -52,7 +52,7 @@
       <City>Tempe</City>
       <State>AZ</State>
       <Zip>85281</Zip>
-    <!-- /Address closing tag intentionally omitted -->
+    <!-- Intentionally omitting the </Address> closing tag -->
   </Hotel>
-
+  
 </Hotel>
