@@ -1,13 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Hotels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="Hotels.xsd">
-  
-  <!-- Sample hotel from specification -->
+<?xml version="1.0" encoding="utf-8"?>
+<Hotels>
   <Hotel Rating="4.2">
-    <Name>Westin Tempe</Name>
+    <Name>Westin</Name>
     <Phone>480-968-8885</Phone>
     <Phone>800-937-8461</Phone>
-    <Address NearestAirport="Sky Harbor">
+    <Address NearestAirport="Sky Habor">
       <Number>11</Number>
       <Street>E 7th St</Street>
       <City>Tempe</City>
@@ -15,7 +12,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="4.5">
     <Name>Marriott Downtown</Name>
     <Phone>602-333-3333</Phone>
@@ -27,7 +24,7 @@
       <Zip>85004</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="4.0">
     <Name>Hyatt Place Tempe</Name>
     <Phone>480-967-5151</Phone>
@@ -40,7 +37,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="3.8">
     <Name>Hilton Garden Inn</Name>
     <Phone>480-966-7000</Phone>
@@ -52,7 +49,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="4.7">
     <Name>AC Hotel by Marriott</Name>
     <Phone>480-642-6140</Phone>
@@ -64,7 +61,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="3.9">
     <Name>Hampton Inn &amp; Suites</Name>
     <Phone>480-410-6100</Phone>
@@ -76,7 +73,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="4.6">
     <Name>Canopy by Hilton</Name>
     <Phone>480-568-3615</Phone>
@@ -88,7 +85,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="4.3">
     <Name>Courtyard by Marriott</Name>
     <Phone>480-966-2800</Phone>
@@ -100,7 +97,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="3.7">
     <Name>Holiday Inn Express</Name>
     <Phone>480-727-4771</Phone>
@@ -113,7 +110,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
+
   <Hotel Rating="4.4">
     <Name>Graduate Tempe</Name>
     <Phone>480-967-9431</Phone>
@@ -125,8 +122,7 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
-  <!-- Additional 11th hotel entry to satisfy requirements -->
+
   <Hotel Rating="4.1">
     <Name>Moxy Phoenix Tempe/ASU Area</Name>
     <Phone>480-968-3451</Phone>
@@ -138,5 +134,4 @@
       <Zip>85281</Zip>
     </Address>
   </Hotel>
-  
 </Hotels>
