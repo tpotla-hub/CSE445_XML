@@ -21,7 +21,6 @@ namespace ConsoleApp1
         public static void Main(string[] args)
         {
 #if DEBUG
-            // Local sanity checks only; disabled for the grader.
             string result = Verification(xmlURL, xsdURL);
             Console.WriteLine(result);
 
@@ -36,71 +35,73 @@ namespace ConsoleApp1
         // Q2.1
         public static string Verification(string xmlUrl, string xsdUrl)
         {
-            // Validate xmlUrl against xsdUrl and return first issue; "No Error" when valid.
+            string validationError = string.Empty;
+            bool foundError = false;
+
             try
             {
-                var schemas = new XmlSchemaSet();
-                using (var xsdReader = XmlReader.Create(xsdUrl))
-                {
-                    schemas.Add(null, xsdReader);
-                }
+                XmlSchemaSet schemaCollection = new XmlSchemaSet();
+                
+                XmlReader xsdReaderStream = XmlReader.Create(xsdUrl);
+                schemaCollection.Add(null, xsdReaderStream);
+                xsdReaderStream.Close();
 
-                bool hasError = false;
-                string firstError = string.Empty;
+                XmlReaderSettings validationSettings = new XmlReaderSettings();
+                validationSettings.ValidationType = ValidationType.Schema;
+                validationSettings.Schemas = schemaCollection;
+                validationSettings.DtdProcessing = DtdProcessing.Ignore;
 
-                var settings = new XmlReaderSettings
+                validationSettings.ValidationEventHandler += delegate(object sender, ValidationEventArgs validationArgs)
                 {
-                    ValidationType = ValidationType.Schema,
-                    Schemas = schemas,
-                    DtdProcessing = DtdProcessing.Ignore
-                };
-
-                settings.ValidationEventHandler += (sender, e) =>
-                {
-                    if (!hasError)
+                    if (!foundError)
                     {
-                        hasError = true;
-                        firstError = e.Message;
+                        validationError = validationArgs.Message;
+                        foundError = true;
                     }
                 };
 
-                using (var xmlReader = XmlReader.Create(xmlUrl, settings))
+                XmlReader xmlReaderStream = XmlReader.Create(xmlUrl, validationSettings);
+                
+                while (xmlReaderStream.Read())
                 {
-                    while (xmlReader.Read())
+                    if (foundError)
                     {
-                        if (hasError) break;
+                        break;
                     }
                 }
+                
+                xmlReaderStream.Close();
 
-                return hasError ? firstError : "No Error";
+                if (foundError)
+                {
+                    return validationError;
+                }
+                
+                return "No Error";
             }
-            catch (Exception ex)
+            catch (Exception err)
             {
-                // Surface network/IO/parsing issues as the message.
-                return ex.Message;
+                return err.Message;
             }
         }
 
         public static string Xml2Json(string xmlUrl)
         {
-            // Convert XML at xmlUrl into JSON that can be deserialized back by Json.NET.
             try
             {
-                var xmlDoc = new XmlDocument { PreserveWhitespace = false };
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.PreserveWhitespace = false;
                 xmlDoc.Load(xmlUrl);
 
-                // Keep the root object to ensure round-trip with DeserializeXmlNode.
-                string jsonText = JsonConvert.SerializeXmlNode(xmlDoc, Newtonsoft.Json.Formatting.Indented, false);
+                string convertedJson = JsonConvert.SerializeXmlNode(xmlDoc, Newtonsoft.Json.Formatting.Indented, false);
 
-                // Sanity check: must be deserializable.
-                _ = JsonConvert.DeserializeXmlNode(jsonText);
+                XmlDocument testDeserialize = JsonConvert.DeserializeXmlNode(convertedJson);
 
-                return jsonText;
+                return convertedJson;
             }
-            catch (Exception ex)
+            catch (Exception err)
             {
-                // Return deterministic message on failure paths.
-                return ex.Message;
+                return err.Message;
             }
         }
     }
